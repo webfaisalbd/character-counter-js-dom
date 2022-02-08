@@ -19,38 +19,51 @@ check.addEventListener('click',function(){
     sentenceLength=sentence.length;
     totalText.innerText=sentenceLength;
 
-    for(i=0;i<sentenceLength;i++){
-        if (sentence[i] >= 'A' && sentence[i] <= 'Z'){
-            upper++;
-        }
-        else if (sentence[i] >= 'a' && sentence[i] <= 'z'){
-            lower++;
-        }
-        else if (sentence[i] >= '0' && sentence[i] <= '9'){
-            number++;
-        }
-        else if (sentence[i] == ' ' && sentence[i-1] != ' '){
-            word++;
-        }
-        else if (sentence[i] == '.' && (sentence[i+1] == ' ' || (sentence[i+1] >= 0 && sentence[i+1] <= 'z')) ){
-            sentenceNumber++;
-        }
-        else{
-            special++;
+    if(sentenceLength==0){
+        Swal.fire('Please Write the text...')
+    }
+    else{
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Count result is ready',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        for(i=0;i<sentenceLength;i++){
+            if (sentence[i] >= 'A' && sentence[i] <= 'Z'){
+                upper++;
+            }
+            else if (sentence[i] >= 'a' && sentence[i] <= 'z'){
+                lower++;
+            }
+            else if (sentence[i] >= '0' && sentence[i] <= '9'){
+                number++;
+            }
+            else if (sentence[i] == ' ' && sentence[i-1] != ' '){
+                word++;
+            }
+            else if (sentence[i] == '.' && (sentence[i+1] == ' ' || (sentence[i+1] >= 0 && sentence[i+1] <= 'z')) ){
+                sentenceNumber++;
+            }
+            else{
+                special++;
+            }
+                
         }
             
-    }
+        upperText.innerText=upper;
+        lowerText.innerText=lower;
+        numberText.innerText=number;
+        specialText.innerText=special;
+        wordText.innerText=word;
+        sentenceText.innerText=sentenceNumber;
         
-    upperText.innerText=upper;
-    lowerText.innerText=lower;
-    numberText.innerText=number;
-    specialText.innerText=special;
-    wordText.innerText=word;
-    sentenceText.innerText=sentenceNumber;
     
-
-    reset.addEventListener('click',function(){
-       location.reload();
-    })
+        reset.addEventListener('click',function(){
+           location.reload();
+           
+        })
+    }
     
 })
